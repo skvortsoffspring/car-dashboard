@@ -1,7 +1,6 @@
 #include <Adafruit_GC9A01A.h>
 #include <Adafruit_GFX.h>
 #include <DS18B20.h>
-#include <math.h>
 #include "temperature.h"
 
 // DS18B20
