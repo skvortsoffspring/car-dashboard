@@ -1,5 +1,6 @@
 const fs = require('fs');
 const sharp = require('sharp');
+const minimalBright = 200;
 
 (function convertLogo() {
     const logos = ['petrol', 'temperature'];
@@ -29,7 +30,7 @@ const sharp = require('sharp');
                         let byte = 0;
 
                         for (let k = i; k < i + 8; k++) {
-                            if (imageData[k][j] > 200)
+                            if (imageData[k][j] > minimalBright)
                                 byte = byte | 1 << k - i;
                         }
 
