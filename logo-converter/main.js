@@ -3,7 +3,7 @@ const sharp = require('sharp');
 const minimalBright = 200;
 
 (function convertLogo() {
-    const logos = ['petrol', 'temperature'];
+    const logos = ['petrol', 'temperature', 'acum'];
     for (const logo of logos) {
         sharp(`symbols/${logo}.png`)
             .resize({width: 64, height: 64})
