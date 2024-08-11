@@ -13,26 +13,47 @@ void drawBorder(Adafruit_GC9A01A *tft) {
 }
 
 void warning(Adafruit_GC9A01A *tft, unsigned short colorFill, unsigned short colorBorder) {
-  tft->fillCircle(180, 180, 12, colorFill);
-  tft->drawCircle(180, 180, 13, colorBorder);
-  tft->drawCircle(180, 180, 14, colorBorder);
+  tft->fillCircle(WARNING_X, WARNING_Y, 12, colorFill);
+  tft->drawCircle(WARNING_X, WARNING_Y, 13, colorBorder);
+  tft->drawCircle(WARNING_X, WARNING_Y, 14, colorBorder);
 }
 
-void sensorReadings(Adafruit_GC9A01A *tft, short reading, const unsigned char sizeText, const char unit[], const unsigned char sizeTextUnit) {
-  tft->setTextSize(sizeText);
+void sensorReadings(Adafruit_GC9A01A *tft, float reading) {
+  char buff[3];
+
   tft->setTextColor(SYSTEM_COLOR, GC9A01A_BLACK);
 
-  char buff[4];
-  snprintf(buff, sizeof(buff), "%3d", reading);
+  snprintf(buff, sizeof(buff), "%2d", (int)reading);
 
-  tft->setCursor(36, 99);
+  tft->setTextSize(7);
+  tft->setCursor(66, 95);
   tft->print(buff);
 
-  tft->setCursor(163, 124);
+  snprintf(buff, sizeof(buff), ".%1d", ((int)(reading * 10)) % 10);
+  tft->setTextSize(4);
+  tft->setCursor(145, 118);
+  tft->print(buff);
+}
 
-  tft->setTextSize(sizeTextUnit);
+void drawUnit(Adafruit_GC9A01A *tft, const char unit[], const uint8_t sizeText, const uint8_t offsetY){
+
+  tft->fillRect(0, offsetY, tft->width(), tft->height() - offsetY, 0x18e3);
+
+  tft->drawLine(0, offsetY, tft->width(), offsetY, SYSTEM_COLOR);
+
+  tft->setTextSize(sizeText);
+  tft->setTextColor(SYSTEM_COLOR);
+
+  int16_t charWidth = 6 * sizeText;
+  int16_t textWidth = strlen(unit) * charWidth;
+
+  int16_t xPos = (tft->width() - textWidth) / 2;
+  int16_t yPos = 12 + offsetY;
+
+  tft->setCursor(xPos, yPos);
   tft->print(unit);
 }
+
 
 void drawSymbol(Adafruit_GC9A01A *tft, unsigned char logo[][COLS]) {
   const unsigned short offsetX = tft->width() / 2 - COLS/ 2;

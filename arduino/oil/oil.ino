@@ -1,9 +1,9 @@
 #include <Adafruit_GC9A01A.h>
 #include <Adafruit_GFX.h>
-#include "petrol.h"
+#include "oil.h"
 #include <common.h>
 
-#define UNIT "litres"
+#define UNIT "kg/cm2"
 
 Adafruit_GC9A01A tft(TFT_CS, TFT_DC);
 
@@ -15,5 +15,5 @@ void setup() {
 }
 
 void loop() {
-  sensorReadings(&tft, 22.0);
+  sensorReadings(&tft, 12.5);
 }
