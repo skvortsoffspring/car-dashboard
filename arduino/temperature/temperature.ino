@@ -5,12 +5,12 @@
 // DS18B20
 #define LOW_ALARM 0
 #define HIGH_ALARM 95
-#define PIN_SENSOR 2
+#define D2 8
 
 #define UNIT "celcius"
 
 Adafruit_GC9A01A tft(TFT_CS, TFT_DC);
-DS18B20 ds(PIN_SENSOR);
+DS18B20 ds(D2);
 
 void setup() {
   init(&tft);
