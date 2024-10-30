@@ -39,7 +39,9 @@ void drawUnit(Adafruit_GC9A01A *tft, const char unit[], const uint8_t sizeText, 
 
   tft->fillRect(0, offsetY, tft->width(), tft->height() - offsetY, 0x18e3);
 
-  tft->drawLine(0, offsetY, tft->width(), offsetY, SYSTEM_COLOR);
+  for(int i = 0; i < 4; i++){
+    tft->drawLine(0, offsetY + i, tft->width(), offsetY + i, SYSTEM_COLOR);
+  }
 
   tft->setTextSize(sizeText);
   tft->setTextColor(SYSTEM_COLOR);
